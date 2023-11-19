@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import {BrowserRouter as Router, Route, Routes, Switch} from 'react-router-dom';
+import Widgets from './widgets/Falcon';
+import Home from './components/Home';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+  // const addTask = () => {
+  //   axios.post('http://localhost:8000/api/tasks/', { title: newTask, completed: false })
+  //   .then(response => setTasks([...tasks, response.data])).catch(error => console.error('Error adding task:', error));
+  // }; 
+  
+//   const toggleTask = (taskId) => { axios.patch('http://localhost:8000/api/tasks/', 
+//   { completed: true }) .then(response => { 
+//     const updatedTasks = tasks.map(task   => (task.id === taskId ? response.data : task)); setTasks(updatedTasks);
+// }) .catch (error => console.error('Error updating task: ', error)); };
+
+
+return (
+  <Router>
+    <Routes>
+    < Route path="/" element={<Home/>} />
+      <Route path="/widget" element={<Widgets/>} />
+    </Routes>
+  </Router>
+
+); 
 }
+
 
 export default App;
