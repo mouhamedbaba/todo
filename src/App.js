@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import {BrowserRouter as Router, Route, Routes, Switch} from 'react-router-dom';
-import Widgets from './widgets/Falcon';
-import Home from './components/Home';
+import { Table } from './components/trial/table';
 
 function App() {
 
@@ -22,8 +21,8 @@ function App() {
 return (
   <Router>
     <Routes>
-    < Route path="/" element={<Home/>} />
-      <Route path="/widget" element={<Widgets/>} />
+    < Route path="/" element={<Table/>} />
+      <Route path="*" element={<Table/>} />
     </Routes>
   </Router>
 

@@ -16,11 +16,11 @@ const AddCard = ({ onAdd }) => {
     } 
     return (
         <>
-        <form onSubmit={handleSubmit} className=" mt-3">
-            <textarea value={title} onChange={(e) => setTitle(e.target.value)} className="form-control" data-input="add-card" rows="2" placeholder="Enter a title for this card..."></textarea>
-            <div className="row gx-2 mt-2">
-              <div className="col"><button className="btn btn-primary btn-sm d-block w-100" type="submit">Add</button></div>
-              <div className="col"><button className="btn btn-outline-secondary btn-sm d-block w-100 border-400" type="button" data-btn-form="hide">Cancel</button></div>
+        <form onSubmit={handleSubmit} class=" mt-3 formaddcard">
+            <textarea value={title} onChange={(e) => setTitle(e.target.value)} class="form-control" data-input="add-card" rows="2" placeholder="Enter a title for this card..."></textarea>
+            <div class="row gx-2 mt-2">
+              <div class="col"><button class="btn btn-primary btn-sm d-block w-100" type="submit">Add</button></div>
+              <div class="col"><button class="btn btn-outline-secondary btn-sm d-block w-100 border-400" type="button" data-btn-form="hide">Cancel</button></div>
             </div>
         </form>
         </>
