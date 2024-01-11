@@ -34,15 +34,12 @@ export const Table = () => {
     }
 
     const playSound = (status) => {
-        // Sélectionne l'élément audio
         let audio = ""
         if (status === true) {
             audio = new Audio('/assets/mp3/success.mp3');
         } else if (status === false) {
             audio = new Audio('/assets/mp3/failed.mp3');
         }
-
-        // Vérifie si l'audio est disponible et joue le son
         if (audio) {
             audio.play();
         }
@@ -81,10 +78,7 @@ export const Table = () => {
     const [edit, setEdit] = useState();
 
     const handleEdit = (todo) => {
-        alert(todo.title)
-        alert(edit.title)
         setEdit(todo)
-        alert(edit.title)
     }
 
     return (
