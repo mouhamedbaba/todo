@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -7,47 +7,19 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="subito web app"
+      content=" web app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <script src="%PUBLIC_URL%/assets/js/config.js"></script>
-  <!-- <script src="%PUBLIC_URL%/assets/jquery/jquery.min.js"></script> -->
-
-  <!-- Commented out script as per your original code -->
- <!-- <script src="%PUBLIC_URL%/assets/jquery/jquery.sticky.js"></script> -->
-
-  <!-- Stylesheets -->
 
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com/">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
 
   <!-- Additional stylesheets -->
-  <link rel="stylesheet" href="%PUBLIC_URL%/vendors/overlayscrollbars/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/theme-rtl.min.css" id="style-rtl">
   <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/theme.min.css" id="style-default">
-  <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/user-rtl.min.css" id="user-style-rtl">
-  <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/user.min.css" id="user-style-default">
-    <script>
-  var isRTL = JSON.parse(localStorage.getItem('isRTL'));
-  if (isRTL) {
-    var linkDefault = document.getElementById('style-default');
-    var userLinkDefault = document.getElementById('user-style-default');
-    linkDefault.setAttribute('disabled', true);
-    userLinkDefault.setAttribute('disabled', true);
-    document.querySelector('html').setAttribute('dir', 'rtl');
-  } else {
-    var linkRTL = document.getElementById('style-rtl');
-    var userLinkRTL = document.getElementById('user-style-rtl');
-    linkRTL.setAttribute('disabled', true);
-    userLinkRTL.setAttribute('disabled', true);
-  }
-</script>
+
+    
     <title>Todolist firebase react </title>
   </head>
   <body class="">
@@ -59,12 +31,8 @@
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <script src="%PUBLIC_URL%/vendors/popper/popper.min.js"></script>
     <script src="%PUBLIC_URL%/vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="%PUBLIC_URL%/vendors/anchorjs/anchor.min.js"></script>
-    <script src="%PUBLIC_URL%/vendors/is/is.min.js"></script>
     <script src="%PUBLIC_URL%/vendors/fontawesome/all.min.js"></script>
-    <script src="%PUBLIC_URL%/vendors/lodash/lodash.min.js"></script>
 
   </body>
 </html>

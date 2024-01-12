@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {BrowserRouter as Router, Route, Routes, Switch} from 'react-router-dom';
-import { Table } from './components/trial/table';
+import { Table } from './components/app/table';
 
 function App() {
 
