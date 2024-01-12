@@ -58,7 +58,7 @@ export const getTodos = () =>{
 }
 
 export const addTodo = (todo) =>{
-    todolist.unshift(todo);
+    todolist.append(todo);
 }
 
 export const deleteTodo = (todo) =>{
