@@ -3,9 +3,14 @@ import { FontawesomeObject } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCheckCircle, faCircle } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { completeTask, deleteTaskt, getTasks } from "./repositorie";
+import { completeTask, deleteTaskt, getTasks, getTodos,  addTodo, deleteTodo, completeTodo} from "./repositorie";
 import { AddTask } from "./AddTaskt";
 import { EditTask } from "./EditTask";
+
+// import {  db, getCities  } from "../../firebase";
+
+// Exemple de récupération de données
+
 export const Table = () => {
     const [state, setState] = useState({
         todoList: [],
@@ -18,19 +23,33 @@ export const Table = () => {
 
     useEffect(() => {
         setState((prevState) => ({ ...prevState, loading: true }));
-        handleGetTasks(state.keyword, state.currentPage, state.limit);
+        // handleGetTasks();
+        handleGetTodo();
     }, [])
 
-    const handleGetTasks = (keyword, page, limit) => {
-        getTasks(keyword, page, limit).then(res => {
-            const TotalTasks = res.headers['x-total-count'];
-            let pages = Math.floor(TotalTasks / limit);
-            if (TotalTasks % limit !== 0) {
-                pages++;
-            };
-            const tasks = { ...state, todoList: res.data, keyword: keyword, currentPage: page, limit: limit, pages: pages, loading: false, };
+    // const handleGetTasks = (keyword, page, limit) => {
+    //     getTasks(keyword, page, limit).then(res => {
+    //         const TotalTasks = res.headers['x-total-count'];
+    //         let pages = Math.floor(TotalTasks / limit);
+    //         if (TotalTasks % limit !== 0) {
+    //             pages++;
+    //         };
+    //         const tasks = { ...state, todoList: res.data, keyword: keyword, currentPage: page, limit: limit, pages: pages, loading: false, };
+    //         setState(tasks);
+    //     })
+    // }
+
+    const handleGetTasks = () => {
+        getTasks().then(res => {
+            const tasks = { ...state, todoList: res.data, loading: false, };
             setState(tasks);
         })
+    }
+
+    const handleGetTodo = () => {
+        const tasks = { ...state, todoList: getTodos(), loading: false, };
+        setState(tasks);
+        
     }
 
     const playSound = (status) => {
@@ -44,6 +63,7 @@ export const Table = () => {
             audio.play();
         }
     }
+    
 
     const handleComplet = (todo) => {
         completeTask(todo).then(res => {
@@ -63,6 +83,24 @@ export const Table = () => {
         })
     }
 
+    const handleCompletTodo = (todo) => {
+        completeTodo(todo);
+
+        const newlist = state.todoList.map(td => {
+
+            if (td.id === todo.id) {
+                td.completed = td.completed
+                if (td.completed == true) {
+                    playSound(true);
+                } else {
+                    playSound(false);
+                }
+            }
+            return td;
+        })
+        setState({ ...state, todoList: newlist });
+    }
+
     const handleDelete = (todo) => {
         deleteTaskt(todo).then(res => {
             const newlist = state.todoList.filter(td => td.id !== todo.id);
@@ -71,8 +109,15 @@ export const Table = () => {
         })
 
     }
+
+    const handleDeleteTodo = (todo) => {
+        deleteTodo(todo.id);
+        const newlist = state.todoList.filter(td => td.id !== todo.id);
+        setState({ ...state, todoList: newlist });
+
+    }
     const paginate = (page) => {
-        handleGetTasks(state.keyword, page, state.limit);
+        handleGetTasks();
     }
 
     const [edit, setEdit] = useState();
@@ -87,7 +132,7 @@ export const Table = () => {
                 <div class="Card-header" >
                     <div class="d-flex justify-content-between align-items-center p-3">
                         <h5 class="mb-0 ">Todo List</h5>
-                        <AddTask onAdd={() => handleGetTasks(state.keyword, state.currentPage, state.limit)} />
+                        <AddTask onAdd={() => handleGetTodo()} />
                         <div class="d-flex ">
                             <div class="">
                                 <input class="form-control shadow-none " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleGetTasks(e.target.value, 1, state.limit)} />
@@ -140,15 +185,15 @@ export const Table = () => {
                                 <tbody class="list">
                                     {state.todoList.map((todo) => (
                                         <tr key={todo.id}>
-                                            <td class="name">{todo.id}</td>
+                                            <td class="name">{todo.date}</td>
                                             <td class={todo.completed ? "email text-decoration-line-through" : "email fw-bold "}>{todo.title}</td>
                                             <td class="age">
-                                                <button class={todo.completed ? 'btn btn-success' : 'btn btn-info'} onClick={() => handleComplet(todo)}>
+                                                <button class={todo.completed ? 'btn btn-success' : 'btn btn-info'} onClick={() => handleCompletTodo(todo)}>
                                                     <FontAwesomeIcon icon={todo.completed ? faCheckCircle : faCircle} ></FontAwesomeIcon>
                                                 </button>
                                             </td>
                                             <td class="list-group-item list-group-item-action">
-                                                <button onClick={() => handleDelete(todo)} class="btn btn-outline-danger">
+                                                <button onClick={() => handleDeleteTodo(todo)} class="btn btn-outline-danger">
                                                     <span class="fas fa-trash" ></span>
                                                 </button>
                                                 <button onClick={() => handleEdit(todo)} class="btn btn-outline-warning mx-2" type="button" data-bs-toggle="modal" data-bs-target="#edit-modal">

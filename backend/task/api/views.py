@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Workspace, WorkspaceColumn, ColumnCard
-from .serializers import TaskSerializer, CardSerializer, ColumnSerializer
+from .models import Workspace, WorkspaceColumn, ColumnCard, Todo
+from .serializers import TaskSerializer, CardSerializer, ColumnSerializer, TodoSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -26,6 +26,10 @@ class ColumnViewSet(viewsets.ModelViewSet):
 class CardViewSet(viewsets.ModelViewSet):
     queryset = ColumnCard.objects.all().order_by('-id')
     serializer_class = CardSerializer
+    
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all().order_by('-id')
+    serializer_class = TodoSerializer
     
 
 

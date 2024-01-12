@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Workspace, ColumnCard, WorkspaceColumn
+from .models import Workspace, ColumnCard, WorkspaceColumn, Todo
 
 
 
@@ -7,6 +7,12 @@ class TaskSerializer(serializers.ModelSerializer):
     
     class Meta :
         model = Workspace
+        fields = '__all__'
+
+class TodoSerializer(serializers.ModelSerializer):
+    
+    class Meta :
+        model = Todo
         fields = '__all__'
         
     

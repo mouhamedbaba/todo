@@ -6,14 +6,17 @@ import axios from "axios";
 
 export const tasksApi= axios.create(
         {
-            baseURL :  "http://localhost:3001",
+            baseURL :  "http://localhost:8000/api",
         }
 )
 
-export const getTasks =  (keyword="", page=1, limit=7) => {
-    return  tasksApi.get(`/tasks?title_like=${keyword}&_page=${page}&_limit=${limit}`);
-}
+// export const getTasks =  (keyword="", page=1, limit=7) => {
+//     return  tasksApi.get(`/tasks?title_like=${keyword}&_page=${page}&_limit=${limit}`);
+// }
 
+export const getTasks =  () => {
+    return  tasksApi.get(`/todo`);
+}
 export const  getTask = async (todo) => {
     return await tasksApi.get(`/tasks/${todo.id}`);
 }
@@ -34,3 +37,54 @@ export const createTask = async (todo) => {
 export const updateTask = async (id, todo) => {
     return await tasksApi.put( `/tasks/${id}`, todo);
 }
+
+
+class Todo {
+    constructor(id, title, completed) {
+        this.id = id;
+        this.title = title;
+        this.completed = completed;
+    }
+}
+
+const todolist = [
+    {
+        "title": "task 1",
+        "id": 1,
+        "completed": false
+      },
+      {
+        "title": "task 1",
+        "id": 2,
+        "completed": true
+      }
+]
+
+
+
+
+export const getTodos = () =>{
+    return todolist;
+}
+
+export const addTodo = (todo) =>{
+    todolist.push(todo);
+}
+
+export const deleteTodo = (todo) =>{
+    todolist.splice(todolist.indexOf(todo), 1);
+}
+
+export const completeTodo = (todo) =>{
+    todo.completed = !todo.completed;
+}
+
+
+// import { firestore } from "./firebase.js";
+
+// // Exemple de récupération de données
+// firestore.collection("utilisateurs").get().then((querySnapshot) => {
+//   querySnapshot.forEach((doc) => {
+//     console.log(doc.id, " => ", doc.data());
+//   });
+// });

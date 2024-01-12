@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { createTask, getTask } from "./repositorie"
+import { createTask, getTask, addTodo } from "./repositorie"
+import { faRandom } from "@fortawesome/free-solid-svg-icons"
 
 export const AddTask = ({onAdd}) => {
     const [title, setTitle] = useState('')
@@ -9,17 +10,24 @@ export const AddTask = ({onAdd}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let task = {
-            title, complete:false
+            id : new Date().toLocaleString(),
+            title, complete:false,
+            date : new Date().toLocaleString()
         }
         if (title !== ""){
-            createTask(task)
-         .then(res => {
-            setTitle('')
-            onAdd(onAdd)
-        })
-         .catch(err => {
-             console.log(err)
-         })
+        //     createTask(task)
+        //  .then(res => {
+        //     setTitle('')
+        //     onAdd(onAdd)
+        // })
+        //  .catch(err => {
+        //      console.log(err)
+        //  })
+        addTodo(task)
+        onAdd(onAdd)
+        setTitle("")
+        } else {
+            alert("Le titre ne doit pas etre vide ioe tmt")
         }
         
     }
@@ -46,7 +54,7 @@ export const AddTask = ({onAdd}) => {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-outline-success" type="submit"  data-bs-dismiss="modal" aria-label="Close">Ajouter </button>
+                            <button class="btn btn-outline-success" type="submit"   data-bs-dismiss={title !== "" ? "modal" : ""}  aria-label="Close">Ajouter </button>
                         </div>
                         </form>
                     </div>
