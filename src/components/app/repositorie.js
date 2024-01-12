@@ -48,16 +48,6 @@ class Todo {
 }
 
 const todolist = [
-    {
-        "title": "task 1",
-        "id": 1,
-        "completed": false
-      },
-      {
-        "title": "task 1",
-        "id": 2,
-        "completed": true
-      }
 ]
 
 
@@ -68,11 +58,11 @@ export const getTodos = () =>{
 }
 
 export const addTodo = (todo) =>{
-    todolist.push(todo);
+    todolist.unshift(todo);
 }
 
 export const deleteTodo = (todo) =>{
-    todolist.splice(todolist.indexOf(todo), 1);
+    todolist.splice(todolist.indexOf(todo), 0);
 }
 
 export const completeTodo = (todo) =>{

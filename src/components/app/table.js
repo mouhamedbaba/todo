@@ -143,71 +143,80 @@ export const Table = () => {
                         </div>
                     </div>
                 </div>
-                <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
-                    <div class="table-responsive scrollbar">
-                        <table class="table table-bordered table-striped fs--1 mb-0">
-                            <thead class="bg-200 text-900">
-                                <tr>
-                                    <th class="sort" data-sort="name">ID</th>
-                                    <th class="sort" data-sort="email">Title</th>
-                                    <th class="sort" data-sort="age">completed</th>
-                                    <th class="no-sort" data-sort=""></th>
-                                </tr>
-                            </thead>                            
-                            {state.loading ? (
-                            <tbody class="list">
-
-                            <tr>
-                                <td class="name"><h6 class="card-text placeholder-glow">
-                                    <span class="placeholder col-6"></span>
-                                </h6></td>
-                                <td class="">                  <h5 class="card-title placeholder-glow">
-                                    <span class="placeholder col-6"></span>
-                                </h5></td>
-                                <td class="age">
-                                <a href="#" tabindex="-1" class="btn btn-outline-info mx-2 disabled placeholder col-1">
-                                    <span class="fas-fa-circle"></span>
-                                </a>
-                                </td>
-                                <td class="list-group-item list-group-item-action">
-                                <a href="#" tabindex="-1" class="btn btn-outline-danger mx-2 disabled placeholder col-1">
-                                    <span class="fas-fa-trash"></span>
-
-                                </a>
-                                <a href="#" tabindex="-1" class="btn btn-outline-warning mx-2 disabled placeholder col-1">
-                                <span class="fas-fa-edit"></span>
-
-                                </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                            ) : (
-                                <tbody class="list">
-                                    {state.todoList.map((todo) => (
-                                        <tr key={todo.id}>
-                                            <td class="name">{todo.date}</td>
-                                            <td class={todo.completed ? "email text-decoration-line-through" : "email fw-bold "}>{todo.title}</td>
-                                            <td class="age">
-                                                <button class={todo.completed ? 'btn btn-success' : 'btn btn-info'} onClick={() => handleCompletTodo(todo)}>
-                                                    <FontAwesomeIcon icon={todo.completed ? faCheckCircle : faCircle} ></FontAwesomeIcon>
-                                                </button>
-                                            </td>
-                                            <td class="list-group-item list-group-item-action">
-                                                <button onClick={() => handleDeleteTodo(todo)} class="btn btn-outline-danger">
-                                                    <span class="fas fa-trash" ></span>
-                                                </button>
-                                                <button onClick={() => handleEdit(todo)} class="btn btn-outline-warning mx-2" type="button" data-bs-toggle="modal" data-bs-target="#edit-modal">
-                                                    <span class="fas fa-edit" ></span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            )}
-                        </table>
+                {
+                state.todoList.length === 0 ?<div className="mt-4 p-3 ">
+                    <div className="d-flex justify-content-center">
+                    <img className="w-25 h-25" src="/assets/notask.svg" />
                     </div>
+                    <h6 className="text-center mt-4">No task found</h6>
+                </div> 
+                 : <div id="tableExample2">
+                <div class="table-responsive scrollbar">
+                    <table class="table table-bordered table-striped fs--1 mb-0">
+                        <thead class="bg-200 text-900">
+                            <tr>
+                                <th class="sort" data-sort="email">Title</th>
+                                <th class="sort" data-sort="age">completed</th>
+                                <th class="sort" data-sort="name">Date</th>
+                                <th class="no-sort" data-sort=""></th>
+                            </tr>
+                        </thead>                            
+                        {state.loading ? (
+                        <tbody class="list">
+
+                        <tr>
+                            <td class="name"><h6 class="card-text placeholder-glow">
+                                <span class="placeholder col-6"></span>
+                            </h6></td>
+                            <td class="">                  <h5 class="card-title placeholder-glow">
+                                <span class="placeholder col-6"></span>
+                            </h5></td>
+                            <td class="age">
+                            <a href="#" tabindex="-1" class="btn btn-outline-info mx-2 disabled placeholder col-1">
+                                <span class="fas-fa-circle"></span>
+                            </a>
+                            </td>
+                            <td class="list-group-item list-group-item-action">
+                            <a href="#" tabindex="-1" class="btn btn-outline-danger mx-2 disabled placeholder col-1">
+                                <span class="fas-fa-trash"></span>
+
+                            </a>
+                            <a href="#" tabindex="-1" class="btn btn-outline-warning mx-2 disabled placeholder col-1">
+                            <span class="fas-fa-edit"></span>
+
+                            </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                        ) : (
+                            <tbody class="list">
+                                {state.todoList.map((todo) => (
+                                    <tr key={todo.id}>
+                                        <td class={todo.completed ? "email text-decoration-line-through" : "email fw-bold "}>{todo.title}</td>
+                                        <td class="age">
+                                            <button class={todo.completed ? 'btn btn-success' : 'btn btn-info'} onClick={() => handleCompletTodo(todo)}>
+                                                <FontAwesomeIcon icon={todo.completed ? faCheckCircle : faCircle} ></FontAwesomeIcon>
+                                            </button>
+                                        </td>
+                                        <td class="name">{todo.date}</td>
+                                        <td class="list-group-item list-group-item-action">
+                                            <button onClick={() => handleDeleteTodo(todo)} class="btn btn-outline-danger">
+                                                <span class="fas fa-trash" ></span>
+                                            </button>
+                                            <button onClick={() => handleEdit(todo)} class="btn btn-outline-warning mx-2" type="button" data-bs-toggle="modal" data-bs-target="#edit-modal">
+                                                <span class="fas fa-edit" ></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        )}
+                    </table>
                 </div>
-                <div class="card-footer">
+            </div>
+                }
+                
+                {/* <div class="card-footer">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end">
                             <li class={(state.currentPage === 1) ? "page-item disabled d-none" : "page-item"}><a class="page-link" role="button" onClick={() => paginate(state.currentPage - 1)}>
@@ -223,7 +232,7 @@ export const Table = () => {
                             </a></li>
                         </ul>
                     </nav>
-                </div>
+                </div> */}
             </div>
             <EditTask edit={edit} />
         </div>
