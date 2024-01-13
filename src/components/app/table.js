@@ -181,7 +181,7 @@ export const Table = () => {
                             <tr>
                                 <th className="sort" data-sort="email">Title</th>
                                 <th className="sort" data-sort="age">completed</th>
-                                <th className="sort" data-sort="name">Date</th>
+                                <th className="sort" data-sort="name d-none d-md-block">Date</th>
                                 <th className="no-sort" data-sort=""></th>
                             </tr>
                         </thead>                            
@@ -222,7 +222,7 @@ export const Table = () => {
                                                 <FontAwesomeIcon icon={todo.completed ? faCheckCircle : faCircle} ></FontAwesomeIcon>
                                             </button>
                                         </td>
-                                        <td className="name">{todo.date}</td>
+                                        <td className="name d-none d-md-block">{todo.date}</td>
                                         <td className="">
                                             <button onClick={() => handleDeleteTodo(todo)} className="btn btn-outline-danger mx-2">
                                                 <span className="fas fa-trash" ></span>
