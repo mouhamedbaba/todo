@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { createTask, getTask, addTodo } from "./repositorie"
+import { createTask, getTask, addTodo, getTodos } from "./repositorie"
 import { faRandom } from "@fortawesome/free-solid-svg-icons"
 
 export const AddTask = ({onAdd}) => {
@@ -24,8 +24,10 @@ export const AddTask = ({onAdd}) => {
         //      console.log(err)
         //  })
         addTodo(task)
+        console.log("get todos after adds",getTodos());
         onAdd(onAdd)
         setTitle("")
+        
         } else {
             alert("Le titre ne doit pas etre vide ioe tmt")
         }

@@ -47,8 +47,14 @@ class Todo {
     }
 }
 
-const todolist = [
-]
+
+let todolist = []
+if (localStorage.getItem("todolist")) {
+    todolist = JSON.parse(localStorage.getItem("todolist"));
+  } else {
+    localStorage.setItem("todolist", JSON.stringify(todolist));
+  }
+
 
 
 
@@ -58,15 +64,21 @@ export const getTodos = () =>{
 }
 
 export const addTodo = (todo) =>{
-    todolist.append(todo);
+    todolist.push(todo);
+        localStorage.setItem("todolist", JSON.stringify(todolist));
+
 }
 
 export const deleteTodo = (todo) =>{
-    todolist.splice(todolist.indexOf(todo), 0);
+    todolist.splice(todolist.indexOf(todo), 1);
+        localStorage.setItem("todolist", JSON.stringify(todolist));
+
 }
 
 export const completeTodo = (todo) =>{
     todo.completed = !todo.completed;
+        localStorage.setItem("todolist", JSON.stringify(todolist));
+
 }
 
 

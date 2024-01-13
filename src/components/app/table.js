@@ -20,6 +20,7 @@ export const Table = () => {
         pages: 0,
         loading: true,
     });
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         setState((prevState) => ({ ...prevState, loading: true }));
@@ -48,6 +49,7 @@ export const Table = () => {
 
     const handleGetTodo = () => {
         const tasks = { ...state, todoList: getTodos(), loading: false, };
+        console.log("get todos on main fonct", getTodos());
         setState(tasks);
         
     }
@@ -110,10 +112,30 @@ export const Table = () => {
 
     }
 
+    const handleSearch = (e) => {
+
+        console.log("handle search", e)
+        console.log("handle search", state.todoList);
+        const filteredData = state.todoList.filter((item) =>
+          item.title.toLowerCase().includes(e.toLowerCase())
+        );
+        if (e.length === 0) {
+          setState({ ...state, todoList: getTodos() });
+        } else if (filteredData.length === 0) {
+          setState({ ...state, todoList: [] });
+        }
+         else {
+          setState({ ...state, todoList: filteredData });
+        }
+      };
+    
+
     const handleDeleteTodo = (todo) => {
         deleteTodo(todo.id);
-        const newlist = state.todoList.filter(td => td.id !== todo.id);
-        setState({ ...state, todoList: newlist });
+        console.log("get todos after delete on main", getTodos());
+        const tasks = { ...state, todoList: getTodos(), loading: false, };
+        console.log("get todos on main fonct", getTodos());
+        setState(tasks);
 
     }
     const paginate = (page) => {
@@ -135,7 +157,8 @@ export const Table = () => {
                         <AddTask onAdd={() => handleGetTodo()} />
                         <div class="d-flex ">
                             <div class="">
-                                <input class="form-control shadow-none " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleGetTasks(e.target.value, 1, state.limit)} />
+                            
+                                <input class="form-control shadow-none " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearch(e.target.value)} /> 
                             </div>
                             <button class="btn btn-falcon-default mx-2" type="button" data-bs-toggle="modal" data-bs-target="#error-modal"> Add task
                                 <span class="fas fa-plus me-2" ></span>
