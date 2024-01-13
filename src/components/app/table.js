@@ -150,17 +150,22 @@ export const Table = () => {
 
     return (
         <div class="container my-5">
+            <div class="shadow card Card-header p-3 mb-3  d-md-none" >
+            <h5 class="mb-0 ">Todo List</h5>
+
+            </div>
             <div class="card shadow">
                 <div class="Card-header" >
                     <div class="d-flex justify-content-between align-items-center p-3">
-                        <h5 class="mb-0 ">Todo List</h5>
+                        <h5 class="mb-0 d-none d-md-block">Todo List</h5>
                         <AddTask onAdd={() => handleGetTodo()} />
                         <div class="d-flex ">
                             <div class="">
                             
-                                <input class="form-control shadow-none " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearch(e.target.value)} /> 
+                                <input class="form-control shadow-none " type="search"  placeholder="Search" aria-label="Search" onChange={(e) => handleSearch(e.target.value)} /> 
                             </div>
-                            <button class="btn btn-falcon-default mx-2" type="button" data-bs-toggle="modal" data-bs-target="#error-modal"> Add task
+                            <button class="btn btn-falcon-default mx-2" type="button" data-bs-toggle="modal" data-bs-target="#error-modal">
+                                {/* <span className="d-none d-x-block">Add task</span>  */}
                                 <span class="fas fa-plus me-2" ></span>
                             </button>
                         </div>
@@ -216,17 +221,17 @@ export const Table = () => {
                                 {state.todoList.map((todo) => (
                                     <tr key={todo.id}>
                                         <td class={todo.completed ? "email text-decoration-line-through" : "email fw-bold "}>{todo.title}</td>
-                                        <td class="age">
+                                        <td class="age d-flex justify-content-center">
                                             <button class={todo.completed ? 'btn btn-success' : 'btn btn-info'} onClick={() => handleCompletTodo(todo)}>
                                                 <FontAwesomeIcon icon={todo.completed ? faCheckCircle : faCircle} ></FontAwesomeIcon>
                                             </button>
                                         </td>
                                         <td class="name">{todo.date}</td>
-                                        <td class="list-group-item list-group-item-action">
-                                            <button onClick={() => handleDeleteTodo(todo)} class="btn btn-outline-danger">
+                                        <td class="">
+                                            <button onClick={() => handleDeleteTodo(todo)} class="btn btn-outline-danger mx-2">
                                                 <span class="fas fa-trash" ></span>
                                             </button>
-                                            <button onClick={() => handleEdit(todo)} class="btn btn-outline-warning mx-2" type="button" data-bs-toggle="modal" data-bs-target="#edit-modal">
+                                            <button onClick={() => handleEdit(todo)} class="btn btn-outline-warning mx-2 mt-2 mt-md-0" type="button" data-bs-toggle="modal" data-bs-target="#edit-modal">
                                                 <span class="fas fa-edit" ></span>
                                             </button>
                                         </td>
