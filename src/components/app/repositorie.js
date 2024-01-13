@@ -91,6 +91,15 @@ export const completeTodo = (todo) =>{
 
 }
 
+export const editTodo = (todo, title) =>{
+    todolist = todolist.map(item => {
+        if (item.id === todo.id) {
+            return { ...item, title: title };
+        }
+        return item;
+    });
+    localStorage.setItem("todolist", JSON.stringify(todolist));
+}
 
 // import { firestore } from "./firebase.js";
 

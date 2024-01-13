@@ -24,7 +24,6 @@ export const AddTask = ({onAdd}) => {
         //      console.log(err)
         //  })
         addTodo(task)
-        console.log("get todos after adds",getTodos());
         onAdd(onAdd)
         setTitle("")
         
@@ -36,27 +35,27 @@ export const AddTask = ({onAdd}) => {
 
     return (
         <div>
-            <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document" >
-                    <div class="modal-content position-relative">
+            <div className="modal fade" id="error-modal" tabIndex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document" >
+                    <div className="modal-content position-relative">
                     <form onSubmit={handleSubmit}>
 
-                        <div class="position-absolute top-0 end-0 mt-2 me-2 z-index-1 d-flex justify-content-end">
-                            <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1 d-flex justify-content-end">
+                            <button className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body p-0">
-                            <div class="rounded-top-lg py-3 ps-4 pe-6 bg-light">
-                                <h4 class="mb-1" id="modalExampleDemoLabel">Add Task</h4>
+                        <div className="modal-body p-0">
+                            <div className="rounded-top-lg py-3 ps-4 pe-6 bg-light">
+                                <h4 className="mb-1" id="modalExampleDemoLabel">Add Task</h4>
                             </div>
-                            <div class="p-4 pb-0">
-                                    <div class="mb-3">
-                                        <label class="col-form-label" for="message-text">Title :</label>
-                                        <input value={title} onChange={(e) => setTitle(e.target.value)} class="form-control shadow-none" id="message-text" required></input>
+                            <div className="p-4 pb-0">
+                                    <div className="mb-3">
+                                        <label className="col-form-label" htmlFor="message-text">Title :</label>
+                                        <input value={title} onChange={(e) => setTitle(e.target.value)} className="form-control shadow-none" id="message-text" required></input>
                                     </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-outline-success" type="submit"   data-bs-dismiss={title !== "" ? "modal" : ""}  aria-label="Close">Save </button>
+                        <div className="modal-footer">
+                            <button className="btn btn-outline-success" type="submit"   data-bs-dismiss={title !== "" ? "modal" : ""}  aria-label="Close">Save </button>
                         </div>
                         </form>
                     </div>
