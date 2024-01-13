@@ -6,6 +6,7 @@ import axios from "axios";
 import { completeTask, deleteTaskt, getTasks, getTodos,  addTodo, deleteTodo, completeTodo} from "./repositorie";
 import { AddTask } from "./AddTaskt";
 import { EditTask } from "./EditTask";
+import { Analytics } from '@vercel/analytics/react';
 
 // import {  db, getCities  } from "../../firebase";
 
@@ -150,6 +151,7 @@ export const Table = () => {
 
     return (
         <div class="container my-5">
+            <Analytics />
             <div class="shadow card Card-header p-3 mb-3  d-md-none" >
             <h5 class="mb-0 ">Todo List</h5>
 
