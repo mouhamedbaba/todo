@@ -181,7 +181,7 @@ export const Table = () => {
                             <tr>
                                 <th className="sort" data-sort="email">Title</th>
                                 <th className="sort" data-sort="age">completed</th>
-                                <th className="sort" data-sort="name d-none d-md-block">Date</th>
+                                <th className="sort d-none d-md-block" data-sort="name ">Date</th>
                                 <th className="no-sort" data-sort=""></th>
                             </tr>
                         </thead>                            
