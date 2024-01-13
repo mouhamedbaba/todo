@@ -63,16 +63,26 @@ export const getTodos = () =>{
     return todolist;
 }
 
+
+
 export const addTodo = (todo) =>{
-    todolist.push(todo);
+    todolist.unshift(todo);
         localStorage.setItem("todolist", JSON.stringify(todolist));
 
 }
 
-export const deleteTodo = (todo) =>{
-    todolist.splice(todolist.indexOf(todo), 1);
-        localStorage.setItem("todolist", JSON.stringify(todolist));
+// export const deleteTodo = (todo) =>{
+//     const index = todolist.indexOf(todo);
+//     // if (index !== -1) {
+//         todolist.splice(index, 1);
+//     // }
+//         localStorage.setItem("todolist", JSON.stringify(todolist));
 
+// }
+
+export const deleteTodo = (todo) => {
+    todolist = todolist.filter(item => item.id !== todo.id);
+    localStorage.setItem("todolist", JSON.stringify(todolist));
 }
 
 export const completeTodo = (todo) =>{

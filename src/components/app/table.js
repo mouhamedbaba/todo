@@ -131,7 +131,7 @@ export const Table = () => {
     
 
     const handleDeleteTodo = (todo) => {
-        deleteTodo(todo.id);
+        deleteTodo(todo);
         console.log("get todos after delete on main", getTodos());
         const tasks = { ...state, todoList: getTodos(), loading: false, };
         console.log("get todos on main fonct", getTodos());
