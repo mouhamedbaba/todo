@@ -7,7 +7,7 @@ import { completeTask, deleteTaskt, getTasks, getTodos, deleteTodo, completeTodo
 import { AddTask } from "./AddTaskt";
 import { EditTask } from "./EditTask";
 import { Analytics } from '@vercel/analytics/react';
-import { Register } from "../../auth/register";
+// import { Register } from "../../auth/register";
 
 // import {  db, getCities  } from "../../firebase";
 
@@ -260,7 +260,7 @@ export const Table = () => {
                 </div> */}
             </div>
             <EditTask toedit={toedit} onEdit={() => handleGetTodo()} />
-          <Register / >
+         
         </div>
     );
 
