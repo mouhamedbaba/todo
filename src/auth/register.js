@@ -2,20 +2,21 @@
 
 import React, { useState } from "react";
 import { auth } from "../config/firebase-config";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-function Register() {
+export const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleRegister = () => {
-    auth.createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        console.log("User registered:", user);
+        alert("User registered:", user);
       })
       .catch((error) => {
-        console.error("Error registering user:", error);
+        alert("Error registering user:", error);
       });
   };
 
@@ -29,4 +30,3 @@ function Register() {
   );
 }
 
-export default Register;
