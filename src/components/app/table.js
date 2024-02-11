@@ -23,12 +23,20 @@ export const Table = () => {
     });
     const [searchTerm, setSearchTerm] = useState('');
 
+
+
     useEffect(() => {
         setState((prevState) => ({ ...prevState, loading: true }));
-        // handleGetTasks();
-        handleGetTodo();
+        handleGetTasks();
+        // handleGetTodo();
     }, [])
 
+    const handleGetTasks = () => {
+        getTasks().then(res => {
+            const tasks = { ...state, todoList: res.data, loading: false, };
+            setState(tasks);
+        })
+    }
     // const handleGetTasks = (keyword, page, limit) => {
     //     getTasks(keyword, page, limit).then(res => {
     //         const TotalTasks = res.headers['x-total-count'];
@@ -41,12 +49,7 @@ export const Table = () => {
     //     })
     // }
 
-    const handleGetTasks = () => {
-        getTasks().then(res => {
-            const tasks = { ...state, todoList: res.data, loading: false, };
-            setState(tasks);
-        })
-    }
+
 
     const handleGetTodo = () => {
         const tasks = { ...state, todoList: getTodos(), loading: false, };
@@ -91,8 +94,7 @@ export const Table = () => {
         const newlist = state.todoList.map(td => {
 
             if (td.id === todo.id) {
-                td.completed = td.completed
-                if (td.completed == true) {
+                if (td.completed === true) {
                     playSound(true);
                 } else {
                     playSound(false);
@@ -104,7 +106,7 @@ export const Table = () => {
     }
 
     const handleDelete = (todo) => {
-        deleteTaskt(todo).then(res => {
+        deleteTaskt(todo.id).then(res => {
             const newlist = state.todoList.filter(td => td.id !== todo.id);
 
             setState({ ...state, todoList: newlist });
@@ -154,7 +156,7 @@ export const Table = () => {
                 <div className="Card-header" >
                     <div className="d-flex justify-content-between align-items-center p-3">
                         <h5 className="mb-0 d-none d-md-block">Todo List</h5>
-                        <AddTask onAdd={() => handleGetTodo()} />
+                        <AddTask onAdd={() => handleGetTasks()} /> 
                         <div className="d-flex ">
                             <div className="">
                             
@@ -170,7 +172,7 @@ export const Table = () => {
                 {
                 state.todoList.length === 0 ?<div className="mt-4 p-3 ">
                     <div className="d-flex justify-content-center">
-                    <img className="w-25 h-25" src="/assets/notask.svg" />
+                    <img className="w-25 h-25" src="/assets/notask.svg" alt="no task" />
                     </div>
                     <h6 className="text-center mt-4">No task found</h6>
                 </div> 
@@ -181,7 +183,7 @@ export const Table = () => {
                             <tr>
                                 <th className="sort" data-sort="email">Title</th>
                                 <th className="sort" data-sort="age">completed</th>
-                                <th className="sort" data-sort="name ">Date</th>
+                                {/* <th className="sort" data-sort="name ">Date</th> */}
                                 <th className="no-sort" data-sort=""></th>
                             </tr>
                         </thead>                            
@@ -218,13 +220,13 @@ export const Table = () => {
                                     <tr key={todo.id}>
                                         <td className={todo.completed ? "email text-decoration-line-through" : "email fw-bold "}>{todo.title}</td>
                                         <td className="age d-flex justify-content-center">
-                                            <button className={todo.completed ? 'btn btn-success' : 'btn btn-info'} onClick={() => handleCompletTodo(todo)}>
+                                            <button className={todo.completed ? 'btn btn-success' : 'btn btn-info'} onClick={() => handleComplet(todo)}>
                                                 <FontAwesomeIcon icon={todo.completed ? faCheckCircle : faCircle} ></FontAwesomeIcon>
                                             </button>
                                         </td>
-                                        <td className="name">{todo.date}</td>
+                                        {/* <td className="name">{todo.date}</td> */}
                                         <td className="">
-                                            <button onClick={() => handleDeleteTodo(todo)} className="btn btn-outline-danger mx-2">
+                                            <button onClick={() => handleDelete(todo)} className="btn btn-outline-danger mx-2">
                                                 <span className="fas fa-trash" ></span>
                                             </button>
                                             <button onClick={() => handleEdit(todo)} className="btn btn-outline-warning mx-2 mt-2 mt-md-0" type="button" data-bs-toggle="modal" data-bs-target="#edit-modal">

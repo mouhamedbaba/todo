@@ -10,9 +10,10 @@ export const AddTask = ({onAdd}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let task = {
-            id : new Date().toLocaleString(),
+            // id : new Date().toLocaleString(),
             title, complete:false,
-            date : new Date().toLocaleString()
+            description : "desc"
+            // date : new Date().toLocaleString()
         }
         if (title !== ""){
         //     createTask(task)
@@ -23,8 +24,10 @@ export const AddTask = ({onAdd}) => {
         //  .catch(err => {
         //      console.log(err)
         //  })
-        addTodo(task)
+        // addTodo(task)
+        createTask(task)
         onAdd(onAdd)
+        
         setTitle("")
         
         } else {

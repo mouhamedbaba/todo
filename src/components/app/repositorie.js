@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const tasksApi= axios.create(
         {
-            baseURL :  "http://localhost:8000/api",
+            baseURL :  "http://localhost:8000/api/",
         }
 )
 
@@ -14,23 +14,29 @@ export const tasksApi= axios.create(
 //     return  tasksApi.get(`/tasks?title_like=${keyword}&_page=${page}&_limit=${limit}`);
 // }
 
-export const getTasks =  () => {
-    return  tasksApi.get(`/todo`);
+export const getTasks = () => {
+    return tasksApi.get(`/tasks/`);
 }
 export const  getTask = async (todo) => {
     return await tasksApi.get(`/tasks/${todo.id}`);
 }
 
-export const deleteTaskt = async (todo) => {
-    return await tasksApi.delete(`/tasks/${todo.id}`);
+export const deleteTaskt =  async(todo) => {
+    try {
+        const response = await tasksApi.delete(`/tasks/${todo}/`);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting task:', error);
+        throw error;
+    }
 }
 
 export const completeTask = async (todo) => {
-    return await tasksApi.patch(`/tasks/${todo.id}`, {completed : !todo.completed});
+    return await tasksApi.patch(`/tasks/${todo.id}/`, {complete : !todo.complete});
 }
 
 export const createTask = async (todo) => {
-    return await tasksApi.post("/tasks", todo);
+    return await tasksApi.post("/tasks/", todo);
 }
 
 
@@ -39,13 +45,7 @@ export const updateTask = async (id, todo) => {
 }
 
 
-class Todo {
-    constructor(id, title, completed) {
-        this.id = id;
-        this.title = title;
-        this.completed = completed;
-    }
-}
+
 
 
 let todolist = []
